@@ -7,9 +7,9 @@ sys.path.append(dname)
 os.chdir(dname)
 
 
-def anti_qsort(numbers):
-    res = list(range(1, numbers + 1))
-    for i in range(2, numbers):
+def anti_qsort(number):
+    res = list(range(1, number + 1))
+    for i in range(2, number):
         res[i // 2], res[i] = res[i], res[i // 2]
     return res
 

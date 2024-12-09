@@ -1,7 +1,8 @@
 import os
 import subprocess
 
-EXCLUDE_DIRS = {'.idea', 'myenv', 'venv', '__pycache__','lab0'}
+
+EXCLUDE_DIRS = {'.git','.idea', 'myenv', 'venv', '__pycache__','lab0'}
 
 # Функция для запуска тестов
 def run_tests(test_file):
@@ -44,4 +45,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-# python3 -m venv myenv
