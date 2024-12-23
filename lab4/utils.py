@@ -59,6 +59,7 @@ def read_stack_input():
             print(line)
     return lines
 
+# Добавить ограничение по времени по памяти в тех тзаджачах где это нужно , использовать assertLessequal
 
 def read_queue_input():
     """

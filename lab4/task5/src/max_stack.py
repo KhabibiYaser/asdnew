@@ -42,7 +42,6 @@ def process_max_stack():
 
     file_write(results)
 
-
 if __name__ == '__main__':
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
     measure_performance(process_max_stack)

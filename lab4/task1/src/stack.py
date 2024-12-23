@@ -1,4 +1,3 @@
-
 import os
 from lab4.utils import file_read, file_write, measure_performance
 
@@ -14,8 +13,7 @@ class Stack:
         return self.stack.pop() if self.stack else None
 
 
-def process_stack_commands():
-    commands = file_read()
+def process_stack_commands(commands):
     stack = Stack()  # Инициализация стека
     results = []
 
@@ -26,10 +24,14 @@ def process_stack_commands():
         elif command == '-':
             results.append(stack.pop())
 
-    file_write(results)
+    return results
 
 
 if __name__ == '__main__':
     # Смена текущей директории на директорию файла stack.py
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    measure_performance(process_stack_commands)
+    commands = file_read()
+    result = measure_performance(process_stack_commands, commands)
+    file_write(result[0])
+
+

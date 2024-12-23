@@ -1,47 +1,62 @@
 import unittest
-from lab4.task1.src.stack import Stack, process_stack_commands
-from lab4.utils import file_read, file_write
+from lab4.task1.src.stack import process_stack_commands
+from lab4.utils import measure_performance
 
 
 class TestStack(unittest.TestCase):
+
     def test_stack_operations(self):
         # given
-        stack = Stack()
-        stack.push(10)
-        stack.push(20)
-
-        # when
-        result1 = stack.pop()
-        result2 = stack.pop()
-
-        # then
-        self.assertEqual(result1, 20)
-        self.assertEqual(result2, 10)
-
-    def test_process_stack_commands(self):
-        # given
-        input_data = [
-            "6",
+        commands = [
             "+ 10",
             "+ 20",
-            "-",
             "+ 30",
             "-",
-            "-"
+            "-",
+            "-",
         ]
-        expected_output = [20, 30, 10]
-
-        with open('../txtf/input.txt', 'w') as f:
-            f.write("\n".join(input_data))
+        expected = [30, 20, 10]
 
         # when
-        process_stack_commands()
+        result, elapsed_time, peak_memory = measure_performance(process_stack_commands, commands)
 
         # then
-        with open('../txtf/output.txt', 'r') as f:
-            output = list(map(int, f.read().strip().split("\n")))
+        self.assertEqual(result, expected)
+        self.assertLessEqual(elapsed_time, 2, "Execution time exceeded 2 seconds")
+        self.assertLessEqual(peak_memory, 256, "Memory usage exceeded 256 MB")
 
-        self.assertEqual(output, expected_output)
+    def test_empty_stack(self):
+        # given
+        commands = ["-"]
+        expected = [None]
+
+        # when
+        result, elapsed_time, peak_memory = measure_performance(process_stack_commands, commands)
+
+        # then
+        self.assertEqual(result, expected)
+        self.assertLessEqual(elapsed_time, 2, "Execution time exceeded 2 seconds")
+        self.assertLessEqual(peak_memory, 256, "Memory usage exceeded 256 MB")
+
+    def test_mixed_operations(self):
+        # given
+        commands = [
+            "+ 5",
+            "+ 15",
+            "-",
+            "+ 25",
+            "-",
+            "-",
+        ]
+        expected = [15, 25, 5]
+
+        # when
+        result, elapsed_time, peak_memory = measure_performance(process_stack_commands, commands)
+
+        # then
+        self.assertEqual(result, expected)
+        self.assertLessEqual(elapsed_time, 2, "Execution time exceeded 2 seconds")
+        self.assertLessEqual(peak_memory, 256, "Memory usage exceeded 256 MB")
 
 
 if __name__ == '__main__':
