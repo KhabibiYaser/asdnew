@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from lab1.utils import *
-import os
-import sys
+from lab1.utils import measure_performance,file_read_size_int_array,file_write
+import os, sys
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 sys.path.append(dname)
